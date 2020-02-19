@@ -2,12 +2,25 @@ package cse360assign2;
 
 public class SimpleList {
 	private int list[];
+	private int size;
 	private int count;
 	
 	//Simple List class constructor
 	public SimpleList() {
-		list = new int[10]; //initialize list
+		size = 10;
+		list = new int[size]; //initialize list
 		count = 0; //initialize count
+	}
+	
+	/**
+	 * Private function to increase the size of the list and copy old values
+	 */
+	private void adjustListSize() {
+		int tempList[] = list;
+		if (size == count) size *= 1.5; // increase list size by 50 percent
+		else if (count < size * .75) size -= 1;
+		list = new int[size];
+		for (int index = 0; index < count; index++) list[index] = tempList[index]; // Copy the list elementwise
 	}
 	
 	/**
@@ -36,7 +49,8 @@ public class SimpleList {
 			}
 			list[0] = num;
 		}
-		if (count < 10) count++;
+		if (count < size) count++;
+		adjustListSize();
 	}
 	
 	/**
@@ -53,6 +67,7 @@ public class SimpleList {
 			}
 			list[count] = 0;
 			if (count > 0) count--; //don't decrement if list is empty
+			adjustListSize();
 		}
 	}
 	

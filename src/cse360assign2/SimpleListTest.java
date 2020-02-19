@@ -25,6 +25,7 @@ public class SimpleListTest {
 	@Test
 	public void testCount() {
 		//5 items added in 'initObject()', count should be 5
+		System.out.print(testList.count());
 		assertEquals(5, testList.count());
 	}
 	
@@ -64,17 +65,6 @@ public class SimpleListTest {
 		}
 		//List should be empty (count = 0) after above loop
 		assertEquals(0, testList.count());
-	}
-	
-	@Test
-	public void rollOverTest() {
-		for (int num = 25; num > 15; num--) {
-			testList.add(num);
-		}
-		//1 2 3 4 5 should fall off completely after the above loop
-		assertEquals("16 17 18 19 20 21 22 23 24 25", testList.toString());
-		//Count  should be 10 at this point, even though more than 10 have been added
-		assertEquals(10, testList.count());
 	}
 
 }
