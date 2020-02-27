@@ -76,6 +76,10 @@ public class SimpleList {
 	 */
 	public int count() { return count; }
 	
+	public int first() { return list[0]; }
+	
+	public int size() { return size; }
+	
 	/**
 	 * Return the list as a String. The elements are separated by a space
 	 */
