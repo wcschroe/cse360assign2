@@ -25,7 +25,6 @@ public class SimpleListTest {
 	@Test
 	public void testCount() {
 		//5 items added in 'initObject()', count should be 5
-		System.out.print(testList.count());
 		assertEquals(5, testList.count());
 	}
 	
@@ -65,6 +64,54 @@ public class SimpleListTest {
 		}
 		//List should be empty (count = 0) after above loop
 		assertEquals(0, testList.count());
+	}
+	
+	@Test
+	public void appendTest() {
+		testList.append(6);
+		testList.append(6);
+		testList.append(6);
+		testList.append(6);
+		testList.append(6);
+		testList.append(6);
+		testList.append(6);
+		testList.append(6);
+		testList.append(6);
+		testList.remove(6);
+		testList.add(6);
+		assertEquals("6 1 2 3 4 5 6 6 6 6 6 6 6 6", testList.toString());
+	}
+	
+	@Test
+	public void firstTest() {
+		assertEquals(1, testList.first());
+	}
+	
+	@Test
+	public void lastTest() {
+		assertEquals(5, testList.last());
+	}
+	
+	@Test
+	public void sizeTest() {
+		assertEquals(10, testList.size());
+	}
+	
+	@Test
+	public void sizeIncreaseTest() {
+		testList.add(6);
+		testList.add(7);
+		testList.add(8);
+		testList.add(9);
+		testList.add(10);
+		testList.add(11);
+		assertEquals(15, testList.size());
+	}
+	
+	@Test
+	public void testSizeDecrease() {
+		testList.remove(4);
+		assertEquals(9, testList.size());
 	}
 
 }

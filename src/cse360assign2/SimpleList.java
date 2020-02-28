@@ -15,10 +15,9 @@ public class SimpleList {
 	/**
 	 * Private function to increase the size of the list and copy old values
 	 */
-	private void adjustListSize() {
+	private void adjustListSize(int byAmount) {
 		int tempList[] = list;
-		if (size == count) size *= 1.5; // increase list size by 50 percent
-		else if (count < size * .75) size -= 1;
+		size += byAmount;
 		list = new int[size];
 		for (int index = 0; index < count; index++) list[index] = tempList[index]; // Copy the list elementwise
 	}
@@ -50,7 +49,7 @@ public class SimpleList {
 			list[0] = num;
 		}
 		if (count < size) count++;
-		adjustListSize();
+		if (count == size) adjustListSize(size / 2); // increase by 50%
 	}
 	
 	/**
@@ -65,9 +64,9 @@ public class SimpleList {
 			for (int index = removeLocation; index < count - 1; index++) {
 				list[index] = list[index + 1];
 			}
-			list[count] = 0;
+			list[count - 1] = 0;
 			if (count > 0) count--; //don't decrement if list is empty
-			adjustListSize();
+			if (count < size * .75 && size > 1) adjustListSize(-1); // decrease by one entry
 		}
 	}
 	
@@ -76,9 +75,25 @@ public class SimpleList {
 	 */
 	public int count() { return count; }
 	
-	public int first() { return list[0]; }
+	public void append(int num) {
+		if (size == count) adjustListSize(1);
+		list[count] = num;
+		count ++;
+	}
 	
-	public int size() { return size; }
+	public int first() { 
+		if (this.count() != 0) return list[0];
+		else return -1;
+	}
+	
+	public int last() {
+		if (this.count() != 0) return list[count - 1];
+		else return -1;
+	}
+	
+	public int size() { 
+		return size; 
+	}
 	
 	/**
 	 * Return the list as a String. The elements are separated by a space
